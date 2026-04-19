@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Metadata Warehouse</title>
+    <meta name="description" content="Computer Vision Metadata Warehouse – upload images, view detections, search and query metadata.">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CDNs: React, ReactDOM, React Router, Lucide, Babel -->
+    <script crossorigin="anonymous" src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script>window.react = window.React;</script>
+    <script crossorigin="anonymous" src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/@remix-run/router@1.15.3/dist/router.umd.min.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/react-router@6.22.3/dist/umd/react-router.production.min.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/react-router-dom@6.22.3/dist/umd/react-router-dom.production.min.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/lucide-react@0.354.0/dist/umd/lucide-react.min.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Vanilla CSS -->  
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+      window.addEventListener('error', function(event) {
+        const errorDiv = document.createElement('div');
+        errorDiv.style.cssText = 'color:red;font-size:24px;z-index:9999;position:fixed;top:0;left:0;background:white;padding:20px;width:100%;';
+        errorDiv.textContent = 'ERROR: ' + event.message + ' at ' + event.filename + ':' + event.lineno;
+        document.body.appendChild(errorDiv);
+      });
+    </script>
+
+    <!-- Application Script (JSX) -->
+    <script
+      type="text/babel"
+      data-presets="env,react"
+      src="app.js"
+    ></script>
+</body>
+</html>
