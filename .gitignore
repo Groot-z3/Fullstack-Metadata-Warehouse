@@ -1,0 +1,6 @@
+# database environment file
+backend/.env
+
+# python cache
+__pycache__/
+*.pyc
