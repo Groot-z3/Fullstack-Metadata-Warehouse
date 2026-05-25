@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, String, JSON, TIMESTAMP
 from db import Base
 
-class BronzeDetection(Base):
-    __tablename__ = "bronze_detection"
+class BronzeLayer(Base):
+    __tablename__ = "bronze_layer"
 
     id = Column(Integer, primary_key=True, index=True)
     image_path = Column(String(255))

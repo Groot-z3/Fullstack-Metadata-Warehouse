@@ -2,7 +2,7 @@ from fastapi import FastAPI, UploadFile
 import shutil
 from PIL import Image
 from db import SessionLocal
-from models import BronzeDetection
+from models import BronzeLayer
 
 app = FastAPI()
 
@@ -27,7 +27,7 @@ async def upload(file: UploadFile):
     ]
 
     db = SessionLocal()
-    record = BronzeDetection(
+    record = BronzeLayer(
         image_path=file_path,
         file_name=file_name,
         file_size=file_size,
