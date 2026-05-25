@@ -7,3 +7,4 @@ __pycache__/
 
 # uploaded images/files
 backend/uploads/*
+!backend/uploads/.gitkeep
