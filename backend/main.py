@@ -2,7 +2,7 @@ from fastapi import FastAPI, UploadFile
 import shutil
 from PIL import Image
 from db import SessionLocal
-from models import BronzeLayer
+from models import BronzeLayer,SilverLayer
 from ultralytics import YOLO
 
 app = FastAPI()
@@ -63,10 +63,19 @@ async def upload(file: UploadFile):
         detections=detections
     )
 
+
     db.add(record)
 
     db.commit()
-
+    db.refresh(record)
+    for detection in detections:
+        silver_record = SilverLayer(
+            bronze_id=record.id,
+            label=detection["label"],
+            confidence=detection["confidence"],
+            bbox=detection["bbox"]
+        )
+        db.add(silver_record)
+    db.commit()
     db.close()
-
-    return {"message": "Stored in bronze"}
+    return {"message": "Success"}

@@ -8,3 +8,6 @@ __pycache__/
 # uploaded images/files
 backend/uploads/*
 !backend/uploads/.gitkeep
+
+#Yolo
+backend/yolov8n.pt

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, JSON, TIMESTAMP
+from sqlalchemy import Column, Float, Integer, String, JSON, TIMESTAMP
 from db import Base
 
 class BronzeLayer(Base):
@@ -11,3 +11,16 @@ class BronzeLayer(Base):
     width = Column(Integer)
     height = Column(Integer)
     detections = Column(JSON)   
+
+class SilverLayer(Base):
+    __tablename__ = "silver_layer"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    bronze_id = Column(Integer)
+
+    label = Column(String(100))
+
+    confidence = Column(Float)
+
+    bbox = Column(JSON)
