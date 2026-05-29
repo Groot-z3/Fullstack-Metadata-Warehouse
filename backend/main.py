@@ -2,7 +2,7 @@ from fastapi import FastAPI, UploadFile
 import shutil
 from PIL import Image
 from db import SessionLocal
-from models import BronzeLayer,SilverLayer
+from models import BronzeLayer, SilverLayer, Dimensions, Facts
 from ultralytics import YOLO
 
 app = FastAPI()
@@ -19,14 +19,12 @@ async def upload(file: UploadFile):
     with open(file_path, "wb") as f:
         shutil.copyfileobj(file.file, f)
 
-    # Extract metadata
     file_name = file.filename
 
     with open(file_path, "rb") as f:
         file_size = len(f.read())
 
     img = Image.open(file_path)
-
     width, height = img.size
 
     results = model(file_path)
@@ -63,19 +61,50 @@ async def upload(file: UploadFile):
         detections=detections
     )
 
-
     db.add(record)
 
     db.commit()
     db.refresh(record)
+
     for detection in detections:
+
         silver_record = SilverLayer(
             bronze_id=record.id,
             label=detection["label"],
             confidence=detection["confidence"],
             bbox=detection["bbox"]
         )
+
         db.add(silver_record)
+
+    for detection in detections:
+
+        label = detection["label"]
+
+        dimension = db.query(Dimensions).filter(
+            Dimensions.label == label
+        ).first()
+
+        if not dimension:
+
+            dimension = Dimensions(
+                label=label
+            )
+
+            db.add(dimension)
+
+            db.commit()
+
+            db.refresh(dimension)
+
+        fact_record = Facts(
+            bronze_id=record.id,
+            object_id=dimension.object_id,
+            confidence=detection["confidence"]
+        )
+
+        db.add(fact_record)
+
     db.commit()
     db.close()
-    return {"message": "Success"}
+    return {"message": "Image processed successfully"}

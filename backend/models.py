@@ -24,3 +24,21 @@ class SilverLayer(Base):
     confidence = Column(Float)
 
     bbox = Column(JSON)
+    
+class Dimensions(Base):
+    __tablename__ = "dimensions"
+
+    object_id = Column(Integer, primary_key=True, index=True)
+    label = Column(String(100), unique=True)
+
+
+class Facts(Base):
+    __tablename__ = "facts"
+
+    fact_id = Column(Integer, primary_key=True, index=True)
+
+    bronze_id = Column(Integer)
+
+    object_id = Column(Integer)
+
+    confidence = Column(Float)
