@@ -121,7 +121,16 @@ async def upload(file: UploadFile):
 
     db.commit()
     db.close()
-    return {"message": "Image processed successfully"}
+    return {
+    "image": file_name,
+    "detections": [
+        {
+            "object": d["label"],
+            "confidence": d["confidence"]
+        }
+        for d in detections
+    ]
+}
 
 @app.get("/analytics")
 def analytics():
