@@ -4,6 +4,7 @@ from PIL import Image
 from db import SessionLocal
 from models import BronzeLayer, SilverLayer, Dimensions, Facts
 from ultralytics import YOLO
+from sqlalchemy import func
 
 app = FastAPI()
 
@@ -108,3 +109,40 @@ async def upload(file: UploadFile):
     db.commit()
     db.close()
     return {"message": "Image processed successfully"}
+
+@app.get("/analytics")
+def analytics():
+
+    db = SessionLocal()
+
+    total_images = db.query(BronzeLayer).count()
+
+    total_detections = db.query(Facts).count()
+
+    top_objects = (
+        db.query(
+            Dimensions.label,
+            func.count(Facts.fact_id).label("count")
+        )
+        .join(Facts, Dimensions.object_id == Facts.object_id)
+        .group_by(Dimensions.label)
+        .order_by(func.count(Facts.fact_id).desc())
+        .all()
+    )
+
+    top_classes = []
+
+    for label, count in top_objects:
+
+        top_classes.append({
+            "object": label,
+            "count": count
+        })
+
+    db.close()
+
+    return {
+        "total_images": total_images,
+        "total_detections": total_detections,
+        "top_classes": top_classes
+    }
