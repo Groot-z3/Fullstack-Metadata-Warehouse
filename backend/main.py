@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile,HTTPException
+from fastapi import FastAPI, UploadFile,HTTPException,Query
 import shutil
 from PIL import Image
 from db import SessionLocal
@@ -200,3 +200,52 @@ def get_metadata(id: int):
     db.close()
 
     return response
+
+@app.get("/search")
+def search(
+    object: str = Query(None),
+    confidence: float = Query(None)
+):
+
+    db = SessionLocal()
+
+    query = (
+        db.query(
+            BronzeLayer.id,
+            BronzeLayer.file_name,
+            BronzeLayer.image_path
+        )
+        .join(
+            SilverLayer,
+            BronzeLayer.id == SilverLayer.bronze_id
+        )
+    )
+
+    if object:
+        query = query.filter(
+            SilverLayer.label.ilike(f"%{object}%")
+        )
+
+    if confidence:
+        query = query.filter(
+            SilverLayer.confidence >= confidence
+        )
+
+    records = query.distinct().all()
+
+    results = []
+
+    for record in records:
+
+        results.append({
+            "id": record.id,
+            "filename": record.file_name,
+            "image_url": f"http://localhost:8000/{record.image_path}",
+            "detections": []
+        })
+
+    db.close()
+
+    return {
+        "results": results
+    }
