@@ -5,8 +5,16 @@ from db import SessionLocal
 from models import BronzeLayer, SilverLayer, Dimensions, Facts
 from ultralytics import YOLO
 from sqlalchemy import func
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 model = YOLO("yolov8n.pt")
 
