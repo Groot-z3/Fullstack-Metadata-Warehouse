@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile
+from fastapi import FastAPI, UploadFile,HTTPException
 import shutil
 from PIL import Image
 from db import SessionLocal
@@ -6,6 +6,7 @@ from models import BronzeLayer, SilverLayer, Dimensions, Facts
 from ultralytics import YOLO
 from sqlalchemy import func
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 app.add_middleware(
@@ -15,7 +16,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+app.mount(
+    "/uploads",
+    StaticFiles(directory="uploads"),
+    name="uploads"
+)
 model = YOLO("yolov8n.pt")
 
 
@@ -154,3 +159,44 @@ def analytics():
         "total_detections": total_detections,
         "top_classes": top_classes
     }
+
+@app.get("/metadata/{id}")
+def get_metadata(id: int):
+
+    db = SessionLocal()
+
+    record = (
+        db.query(BronzeLayer)
+        .filter(BronzeLayer.id == id)
+        .first()
+    )
+
+    if not record:
+        db.close()
+        raise HTTPException(
+            status_code=404,
+            detail="Image not found"
+        )
+
+    detections = []
+
+    for detection in record.detections:
+
+        detections.append({
+            "object": detection["label"],
+            "confidence": detection["confidence"]
+        })
+
+    response = {
+        "id": record.id,
+        "filename": record.file_name,
+        "width": record.width,
+        "height": record.height,
+        "model": "yolov8n",
+        "image_url": f"http://localhost:8000/{record.image_path}",
+        "detections": detections
+    }
+
+    db.close()
+
+    return response
