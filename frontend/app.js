@@ -199,6 +199,7 @@ const UploadSection = () => {
       <div className="card upload-card mb-32">
         <div className="button-group">
           <button 
+            type="button"
             id="btn-upload-image"
             className="btn btn-primary" 
             onClick={() => imageInputRef.current && imageInputRef.current.click()}
@@ -207,6 +208,7 @@ const UploadSection = () => {
             Upload Single Image
           </button>
           <button 
+            type="button"
             id="btn-upload-dataset"
             className="btn btn-outline" 
             onClick={() => datasetInputRef.current && datasetInputRef.current.click()}
