@@ -2,7 +2,7 @@
 
 A Full-stack Metadata warehouse that extracts, stores, searches, and analyzes image metadata using YOLOv8 and Medallion Architecture (Bronze, Silver, Gold).
 
-## Features✨
+## Features🎯
 
 - Upload images for automatic metadata extraction
 - Object detection using YOLOv8
