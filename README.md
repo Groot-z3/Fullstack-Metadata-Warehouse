@@ -77,7 +77,7 @@ Stores analytics-ready data using Facts and Dimensions tables.
 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Groot-z3/Fullstack-Metadata-Warehouse.git
 cd Fullstack-Metadata-Warehouse
 ```
 
