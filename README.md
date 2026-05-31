@@ -57,16 +57,20 @@ Stores analytics-ready data using Facts and Dimensions tables.
 ## Screenshots📸
 
 ### Upload Page
-![Upload Page](screenshots/upload.png)
+<img width="1852" height="943" alt="image" src="https://github.com/user-attachments/assets/afd75e15-c378-4657-84d3-595ed0f08bec" />
+
 
 ### Search Page
-![Search Page](screenshots/search.png)
+<img width="1304" height="685" alt="image" src="https://github.com/user-attachments/assets/5ba4871b-a770-489d-aa1c-0ddaa9986a03" />
+
 
 ### Metadata Viewer
-![Metadata Viewer](screenshots/metadata.png)
+<img width="1346" height="756" alt="image" src="https://github.com/user-attachments/assets/166d59eb-d1d5-4071-81e6-990e5b099be1" />
+
 
 ### Analytics Dashboard
-![Analytics Dashboard](screenshots/analytics.png)
+<img width="1289" height="827" alt="image" src="https://github.com/user-attachments/assets/0c23394c-a5fd-4459-80af-86a1b9da6ea8" />
+
 
 ## Run Locally🚀
 
@@ -95,9 +99,4 @@ Run the backend:
 uvicorn main:app --reload
 ```
 
-Open the frontend using Live Server or any static web server.
-
-
-## Author
-
-Navneet Nandakumar
+Open the Frontend using Live Server or any static web server.
