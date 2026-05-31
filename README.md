@@ -1,8 +1,8 @@
 # Metadata Warehouse for Computer Vision Images
 
-A full-stack metadata warehouse that extracts, stores, searches, and analyzes image metadata using YOLOv8 and Medallion Architecture (Bronze, Silver, Gold).
+A Full-stack Metadata warehouse that extracts, stores, searches, and analyzes image metadata using YOLOv8 and Medallion Architecture (Bronze, Silver, Gold).
 
-## Features
+## Features✨
 
 - Upload images for automatic metadata extraction
 - Object detection using YOLOv8
@@ -11,7 +11,7 @@ A full-stack metadata warehouse that extracts, stores, searches, and analyzes im
 - Metadata viewer with image properties and detection results
 - Analytics dashboard showing warehouse statistics
 
-## Tech Stack
+## Tech Stack🛠️
 
 ### Frontend
 - React
@@ -29,7 +29,7 @@ A full-stack metadata warehouse that extracts, stores, searches, and analyzes im
 ### Computer Vision
 - YOLOv8
 
-## Architecture
+##  Architecture🏗️
 
 ```text
 Upload Image
@@ -54,7 +54,7 @@ Stores normalized detection records.
 ### Gold Layer
 Stores analytics-ready data using Facts and Dimensions tables.
 
-## Screenshots
+## Screenshots📸
 
 ### Upload Page
 ![Upload Page](screenshots/upload.png)
@@ -68,7 +68,7 @@ Stores analytics-ready data using Facts and Dimensions tables.
 ### Analytics Dashboard
 ![Analytics Dashboard](screenshots/analytics.png)
 
-## Run Locally
+## Run Locally🚀
 
 Clone the repository:
 
