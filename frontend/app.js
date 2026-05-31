@@ -579,7 +579,7 @@ const AnalyticsSection = () => {
     );
 };
 
-// App Wrapper
+// App Wrapper with Routing
 const App = () => {
   return (
     <BrowserRouter>
