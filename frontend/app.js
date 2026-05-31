@@ -208,7 +208,7 @@ const UploadSection = () => {
             Upload Single Image
           </button>
           <button 
-            type="button"
+            type="button" 
             id="btn-upload-dataset"
             className="btn btn-outline" 
             onClick={() => datasetInputRef.current && datasetInputRef.current.click()}
